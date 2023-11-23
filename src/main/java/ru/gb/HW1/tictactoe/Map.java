@@ -1,6 +1,4 @@
-package ru.gb;
-
-import org.w3c.dom.ls.LSOutput;
+package ru.gb.HW1.tictactoe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +19,8 @@ public class Map extends JPanel {
 
     private int sizeCountX;
     private int sizeCountY;
+
+    private int wLen;
 
     private static final int DOT_PADDING = 2;
 
@@ -47,7 +47,6 @@ public class Map extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-//                 super.mouseReleased(e);
                 update(e);
             }
         });
@@ -106,6 +105,8 @@ public class Map extends JPanel {
     }
 
     private void aiTurn() {
+        if(turnAiWinCell()) return;
+        if(turnHumanWinCell()) return;
         int valueX, valueY;
         do {
             valueX = rnd.nextInt(sizeCountX);
@@ -114,16 +115,63 @@ public class Map extends JPanel {
         field[valueY][valueX] = AI;
     }
 
-    private boolean checkWin(char C) {
-        if (field[0][0] == C && field[0][1] == C && field[0][2] == C) return true;
-        if (field[1][0] == C && field[1][1] == C && field[1][2] == C) return true;
-        if (field[2][0] == C && field[2][1] == C && field[2][2] == C) return true;
-        if (field[0][0] == C && field[1][0] == C && field[2][0] == C) return true;
-        if (field[0][1] == C && field[1][1] == C && field[2][1] == C) return true;
-        if (field[0][2] == C && field[1][2] == C && field[2][2] == C) return true;
-        if (field[0][0] == C && field[1][1] == C && field[2][2] == C) return true;
-        if (field[0][2] == C && field[1][1] == C && field[2][0] == C) return true;
+    private boolean turnAiWinCell(){
+        for (int i = 0; i < sizeCountX; i++) {
+            for (int j = 0; j < sizeCountY; j++) {
+                if(isEmptyCell(i,j)){
+                    field[j][i]=AI;
+                    if(checkWin((char)AI)) return true;
+                    field[j][i]=EMPTY;
+                }
+            }
+        }
         return false;
+    }
+
+    private boolean turnHumanWinCell(){
+        for (int i = 0; i < sizeCountX; i++) {
+            for (int j = 0; j < sizeCountY; j++) {
+                if(isEmptyCell(i,j)){
+                    field[j][i] = HUMAN;
+                    if(checkWin((char)HUMAN)){
+                        field[j][i] = AI;
+                        return true;
+                    }
+                        field [j][i] = EMPTY;
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+    private boolean checkWin(char c) {
+
+        for (int i = 0; i < sizeCountX; i++) {
+            for (int j = 0; j < sizeCountY; j++) {
+                if (checkLine(i, j, 1, 0, wLen, c)) return true;
+                if (checkLine(i, j, 0, 1, wLen, c)) return true;
+                if (checkLine(i, j, 1, 1, wLen, c)) return true;
+                if (checkLine(i, j, 1, -1, wLen, c)) return true;
+
+            }
+
+        }
+        return false;
+
+    }
+
+    private boolean checkLine(int x, int y, int vx, int vy, int len, char c) {
+        final int farX = x + (len - 1) * vx;
+        final int farY = y + (len - 1) * vy;
+        if (!isValidCell(farX, farY)) return false;
+        for (int i = 0; i < len; i++) {
+            if (field[y + i * vy][x + i * vx] != c) return false;
+        }
+        return true;
+
+
     }
 
     private boolean isMapFull() {
@@ -138,6 +186,7 @@ public class Map extends JPanel {
     void startNewGame(int mode, int sizeCountX, int sizeCountY, int wLen) {
         this.sizeCountX = sizeCountX;
         this.sizeCountY = sizeCountY;
+        this.wLen = wLen;
         isInitialized = true;
         isGameOver = false;
         initMap();
