@@ -1,7 +1,7 @@
-package ru.gb.HW1.chat.developers;
+package ru.gb.HW1.developers;
 
-import ru.gb.HW1.chat.developers.interfaces.BackAction;
-import ru.gb.HW1.chat.developers.interfaces.FrontAction;
+import ru.gb.HW1.developers.interfaces.BackAction;
+import ru.gb.HW1.developers.interfaces.FrontAction;
 
 public class FullStackDeveloper implements BackAction, FrontAction {
 

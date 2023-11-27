@@ -1,6 +1,6 @@
-package ru.gb.HW1.chat.developers;
+package ru.gb.HW1.developers;
 
-import ru.gb.HW1.chat.developers.interfaces.BackAction;
+import ru.gb.HW1.developers.interfaces.BackAction;
 
 public class Backender implements BackAction {
 

@@ -1,6 +1,6 @@
-package ru.gb.HW1.chat.developers;
+package ru.gb.HW1.developers;
 
-import ru.gb.HW1.chat.developers.interfaces.Developer;
+import ru.gb.HW1.developers.interfaces.Developer;
 
 public class Main {
     public static void main(String[] args) {

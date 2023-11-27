@@ -1,4 +1,4 @@
-package ru.gb.HW1.chat.developers.interfaces;
+package ru.gb.HW1.developers.interfaces;
 
 public interface BackAction extends Developer{
         void developBack();
