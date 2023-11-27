@@ -5,12 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChatServer extends JFrame {
+public class ChatServer extends JFrame implements ChatListener {
     private static final int WINDOW_HEIGHT = 400;
     private static final int WINDOW_WIDTH = 500;
-    boolean isServerWorking;
+
+    private final ServerListener server;
+
+    private final JTextArea textArea;
+
 
     ChatServer() {
+        server = new Server(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setTitle("ChatServer");
@@ -20,16 +25,16 @@ public class ChatServer extends JFrame {
         JButton btnStartServer = new JButton("Запустить сервер");
         JButton btnStopServer = new JButton("Остановить сервер");
 
-        JPanel topPanel = new JPanel(new GridLayout(1,2));
+        JPanel topPanel = new JPanel(new GridLayout(1, 2));
         topPanel.add(btnStartServer);
         topPanel.add(btnStopServer);
 
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         setLayout(new BorderLayout());
-        add(topPanel,BorderLayout.NORTH);
+        add(topPanel, BorderLayout.NORTH);
         add(scrollPane);
 
         setVisible(true);
@@ -37,24 +42,14 @@ public class ChatServer extends JFrame {
         btnStartServer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isServerWorking) {
-                    textArea.append("Сервер уже работает\n");
-                } else {
-                    isServerWorking = true;
-                    textArea.append("Сервер успешно запущен\n");
-                }
+                server.onServerExecute("start");
             }
         });
 
         btnStopServer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!isServerWorking) {
-                    textArea.append("Сервер уже остановлен\n");
-                } else {
-                    isServerWorking = false;
-                    textArea.append("Сервер успешно остановлен\n");
-                }
+                server.onServerExecute("stop");
             }
         });
     }
@@ -62,4 +57,14 @@ public class ChatServer extends JFrame {
     public static void main(String[] args) {
         new ChatServer();
     }
+
+    private void addMessageToLog(String msg){
+        textArea.append(msg);
+    }
+
+    @Override
+    public void messageReceive(String msg) {
+        addMessageToLog(msg);
+    }
+
 }
