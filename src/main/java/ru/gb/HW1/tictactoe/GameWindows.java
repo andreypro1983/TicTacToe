@@ -31,18 +31,8 @@ public class GameWindows extends JFrame {
         panelBottom.add(btnExit);
         add(panelBottom, BorderLayout.SOUTH);
         add(map);
-        btnStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settingsWindow.setVisible(true);
-            }
-        });
-        btnExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        btnStart.addActionListener(e -> settingsWindow.setVisible(true));
+        btnExit.addActionListener(e -> System.exit(0));
 
         map.repaint();
         setVisible(true);

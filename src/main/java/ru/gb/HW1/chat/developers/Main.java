@@ -16,13 +16,14 @@ public class Main {
     }
 
     private static void execute(Developer[] devs){
-        for (int i = 0; i < devs.length; i++) {
-            if (devs[i] instanceof Backender){
-                ((Backender) devs[i]).developBack();
-            } else if (devs[i] instanceof Frontender) {
-                ((Frontender) devs[i]).developGUI();
-            } else if (devs[i] instanceof FullStackDeveloper){
-                ((FullStackDeveloper) devs[i]).developGUI(); ((FullStackDeveloper) devs[i]).developBack();
+        for (Developer dev : devs) {
+            if (dev instanceof Backender) {
+                ((Backender) dev).developBack();
+            } else if (dev instanceof Frontender) {
+                ((Frontender) dev).developGUI();
+            } else if (dev instanceof FullStackDeveloper) {
+                ((FullStackDeveloper) dev).developGUI();
+                ((FullStackDeveloper) dev).developBack();
             } else {
                 System.out.println("Специализация сотрудника неизвестна");
             }
