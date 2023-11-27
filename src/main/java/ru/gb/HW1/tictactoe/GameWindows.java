@@ -2,8 +2,7 @@ package ru.gb.HW1.tictactoe;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class GameWindows extends JFrame {
     private static final int WINDOW_HEIGHT = 555;

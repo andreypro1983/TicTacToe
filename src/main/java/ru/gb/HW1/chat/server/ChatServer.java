@@ -39,26 +39,16 @@ public class ChatServer extends JFrame implements ChatListener {
 
         setVisible(true);
 
-        btnStartServer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                server.onServerExecute("start");
-            }
-        });
+        btnStartServer.addActionListener(e -> server.onServerExecute("start"));
 
-        btnStopServer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                server.onServerExecute("stop");
-            }
-        });
+        btnStopServer.addActionListener(e -> server.onServerExecute("stop"));
     }
 
     public static void main(String[] args) {
         new ChatServer();
     }
 
-    private void addMessageToLog(String msg){
+    private void addMessageToLog(String msg) {
         textArea.append(msg);
     }
 
