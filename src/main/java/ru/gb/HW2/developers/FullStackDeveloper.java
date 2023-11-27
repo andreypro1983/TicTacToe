@@ -1,7 +1,7 @@
-package ru.gb.HW1.developers;
+package ru.gb.HW2.developers;
 
-import ru.gb.HW1.developers.interfaces.BackAction;
-import ru.gb.HW1.developers.interfaces.FrontAction;
+import ru.gb.HW2.developers.interfaces.BackAction;
+import ru.gb.HW2.developers.interfaces.FrontAction;
 
 public class FullStackDeveloper implements BackAction, FrontAction {
 

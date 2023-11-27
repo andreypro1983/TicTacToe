@@ -1,6 +1,6 @@
-package ru.gb.HW1.developers;
+package ru.gb.HW2.developers;
 
-import ru.gb.HW1.developers.interfaces.FrontAction;
+import ru.gb.HW2.developers.interfaces.FrontAction;
 
 public class Frontender implements FrontAction {
 

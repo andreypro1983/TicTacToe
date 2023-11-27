@@ -1,6 +1,6 @@
-package ru.gb.HW1.developers;
+package ru.gb.HW2.developers;
 
-import ru.gb.HW1.developers.interfaces.Developer;
+import ru.gb.HW2.developers.interfaces.Developer;
 
 public class Main {
     public static void main(String[] args) {
